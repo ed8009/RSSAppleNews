@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		80837FDA1C919231004E2C45 /* NewsRSS.m in Sources */ = {isa = PBXBuildFile; fileRef = 80837FD91C919231004E2C45 /* NewsRSS.m */; };
 		80D1582E1C900C3D0020CEA0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 80D1582D1C900C3D0020CEA0 /* main.m */; };
 		80D158311C900C3D0020CEA0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 80D158301C900C3D0020CEA0 /* AppDelegate.m */; };
 		80D158371C900C3D0020CEA0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 80D158351C900C3D0020CEA0 /* Main.storyboard */; };
@@ -19,7 +20,6 @@
 		80D158681C901EE90020CEA0 /* TableCellCustom.m in Sources */ = {isa = PBXBuildFile; fileRef = 80D158671C901EE90020CEA0 /* TableCellCustom.m */; };
 		80D1586A1C903E610020CEA0 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 80D158691C903E610020CEA0 /* Default-568h@2x.png */; };
 		80D1586D1C904D3D0020CEA0 /* BrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 80D1586C1C904D3D0020CEA0 /* BrowserViewController.m */; };
-		80E583381C916F05001CAEF4 /* NewsRSS.m in Sources */ = {isa = PBXBuildFile; fileRef = 80E583361C916F05001CAEF4 /* NewsRSS.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +40,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		80837FD81C919231004E2C45 /* NewsRSS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsRSS.h; sourceTree = "<group>"; };
+		80837FD91C919231004E2C45 /* NewsRSS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsRSS.m; sourceTree = "<group>"; };
 		80D158291C900C3D0020CEA0 /* RSSAppleNews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RSSAppleNews.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		80D1582D1C900C3D0020CEA0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		80D1582F1C900C3D0020CEA0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -62,8 +64,6 @@
 		80D158691C903E610020CEA0 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		80D1586B1C904D3D0020CEA0 /* BrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowserViewController.h; sourceTree = "<group>"; };
 		80D1586C1C904D3D0020CEA0 /* BrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrowserViewController.m; sourceTree = "<group>"; };
-		80E583351C916F05001CAEF4 /* NewsRSS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewsRSS.h; path = ../NewsRSS.h; sourceTree = "<group>"; };
-		80E583361C916F05001CAEF4 /* NewsRSS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewsRSS.m; path = ../NewsRSS.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,8 +117,8 @@
 			children = (
 				80D1582F1C900C3D0020CEA0 /* AppDelegate.h */,
 				80D158301C900C3D0020CEA0 /* AppDelegate.m */,
-				80E583351C916F05001CAEF4 /* NewsRSS.h */,
-				80E583361C916F05001CAEF4 /* NewsRSS.m */,
+				80837FD81C919231004E2C45 /* NewsRSS.h */,
+				80837FD91C919231004E2C45 /* NewsRSS.m */,
 				80D158621C900D540020CEA0 /* ReadRssTableViewController.h */,
 				80D158631C900D540020CEA0 /* ReadRssTableViewController.m */,
 				80D158351C900C3D0020CEA0 /* Main.storyboard */,
@@ -293,7 +293,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				80D1583A1C900C3D0020CEA0 /* RSSAppleNews.xcdatamodeld in Sources */,
-				80E583381C916F05001CAEF4 /* NewsRSS.m in Sources */,
+				80837FDA1C919231004E2C45 /* NewsRSS.m in Sources */,
 				80D158311C900C3D0020CEA0 /* AppDelegate.m in Sources */,
 				80D158681C901EE90020CEA0 /* TableCellCustom.m in Sources */,
 				80D158641C900D540020CEA0 /* ReadRssTableViewController.m in Sources */,
