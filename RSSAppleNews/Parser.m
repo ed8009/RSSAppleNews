@@ -34,6 +34,14 @@
     return sharedMyManager;
 }
 
+- (instancetype)init {
+    if (self = [super init]) {
+        AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+        self.managedObjectContext = delegate.managedObjectContext;
+    }
+    return self;
+}
+
 - (void)startParser:(NSMutableData *)data {
     self.news = [NSMutableArray array];
     NSXMLParser *rssParser = [[NSXMLParser alloc] initWithData:data];
