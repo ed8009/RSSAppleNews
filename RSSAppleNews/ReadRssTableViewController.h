@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <CoreData/CoreData.h>
+#import "TableCellCustom.h"
+#import "BrowserViewController.h"
+#import "LoadingData.h"
+#import "Parser.h"
 
 @interface ReadRssTableViewController : UITableViewController <NSXMLParserDelegate>
-
-@property (nonatomic,strong) NSManagedObjectContext* managedObjectContext;
-@property (nonatomic,strong) NSMutableArray* newsCoreData;
 
 @end

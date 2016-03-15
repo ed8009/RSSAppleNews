@@ -11,10 +11,11 @@
 
 @interface NewsRSS : NSManagedObject
 
-@property (nullable, nonatomic, retain) NSString *newsDate;
+@property (nullable, nonatomic, retain) NSDate *newsDate;
 @property (nullable, nonatomic, retain) NSString *newsDescription;
 @property (nullable, nonatomic, retain) NSString *newsLink;
 @property (nullable, nonatomic, retain) NSString *newsTitle;
+
 @end
 
 

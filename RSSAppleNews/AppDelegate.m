@@ -7,22 +7,14 @@
 //
 
 #import "AppDelegate.h"
-#import "ReadRssTableViewController.h"
-
 @interface AppDelegate ()
 
 @end
 
 @implementation AppDelegate
 
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    
-    UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
-    ReadRssTableViewController *controller = (ReadRssTableViewController *)navigationController.topViewController;
-    controller.managedObjectContext = self.managedObjectContext;
-    
     return YES;
 }
 
