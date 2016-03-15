@@ -10,9 +10,9 @@
 
 @interface ReadRssTableViewController ()
 
-@property (nonatomic) Parser *sharedMyManagerParser;
-@property (nonatomic) LoadingData *sharedMyManagerLoading;
-@property (nonatomic,strong) NSArray* newsCoreData;
+@property (nonatomic, strong) Parser *sharedMyManagerParser;
+@property (nonatomic, strong) LoadingData *sharedMyManagerLoading;
+@property (nonatomic, strong) NSArray* newsCoreData;
 
 @end
 
@@ -43,7 +43,7 @@
     [self.tableView reloadData];
 }
 
-#pragma mark - TableView
+#pragma mark - UITableViewDataSource and UITableViewDelegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;

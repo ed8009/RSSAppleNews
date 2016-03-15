@@ -10,6 +10,6 @@
 
 @interface BrowserViewController : UIViewController <UIWebViewDelegate>
 
-@property (nonatomic) NSString *url;
+@property (nonatomic, strong) NSString *url;
 
 @end

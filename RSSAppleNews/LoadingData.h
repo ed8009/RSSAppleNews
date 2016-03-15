@@ -10,10 +10,9 @@
 
 @interface LoadingData : UIViewController
 
-@property (nonatomic) NSMutableData *rssData;
-
-- (void)startConnction:(NSURL *)url;
+@property (nonatomic, strong) NSMutableData *rssData;
 
 + (id)sharedMyManagerLoading;
+- (void)startConnction:(NSURL *)url;
 
 @end

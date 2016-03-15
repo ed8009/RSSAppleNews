@@ -19,13 +19,6 @@
     return sharedMyManager;
 }
 
-- (id)init {
-    
-    if (self = [super init]){
-    }
-    return self;
-}
-
 - (void)startConnction:(NSURL *)url{
     
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];

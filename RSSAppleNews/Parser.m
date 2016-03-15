@@ -10,15 +10,15 @@
 
 @interface Parser ()
 
-@property (nonatomic) NSString * currentElement;
-@property (nonatomic) NSMutableString * currentDescription;
-@property (nonatomic) NSMutableString *currentTitle;
-@property (nonatomic) NSMutableString *pubDate;
-@property (nonatomic) NSMutableString *currentLink;
-@property (nonatomic,strong) NSArray* newsCoreData;
-@property (nonatomic) NSMutableArray *news;
-@property (nonatomic,strong) NSManagedObjectContext* managedObjectContext;
-@property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic, strong) NSString * currentElement;
+@property (nonatomic, strong) NSMutableString * currentDescription;
+@property (nonatomic, strong) NSMutableString *currentTitle;
+@property (nonatomic, strong) NSMutableString *pubDate;
+@property (nonatomic, strong) NSMutableString *currentLink;
+@property (nonatomic, strong) NSArray* newsCoreData;
+@property (nonatomic, strong) NSMutableArray *news;
+@property (nonatomic, strong) NSManagedObjectContext* managedObjectContext;
+@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 
 @end
 
@@ -32,14 +32,6 @@
 
     });
     return sharedMyManager;
-}
-
-- (id)init {
-    if (self = [super init]) {
-        AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-        self.managedObjectContext = delegate.managedObjectContext;
-    }
-    return self;
 }
 
 - (void)startParser:(NSMutableData *)data {
