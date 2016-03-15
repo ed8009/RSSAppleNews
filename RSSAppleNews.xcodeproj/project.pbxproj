@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8031ACCA1C9715F600AB6785 /* LoadingData.m in Sources */ = {isa = PBXBuildFile; fileRef = 8031ACC91C9715F600AB6785 /* LoadingData.m */; };
+		8031ACCD1C97175600AB6785 /* Parser.m in Sources */ = {isa = PBXBuildFile; fileRef = 8031ACCC1C97175600AB6785 /* Parser.m */; };
 		80837FDA1C919231004E2C45 /* NewsRSS.m in Sources */ = {isa = PBXBuildFile; fileRef = 80837FD91C919231004E2C45 /* NewsRSS.m */; };
 		80D1582E1C900C3D0020CEA0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 80D1582D1C900C3D0020CEA0 /* main.m */; };
 		80D158311C900C3D0020CEA0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 80D158301C900C3D0020CEA0 /* AppDelegate.m */; };
@@ -40,6 +42,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8031ACC81C9715F600AB6785 /* LoadingData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingData.h; sourceTree = "<group>"; };
+		8031ACC91C9715F600AB6785 /* LoadingData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingData.m; sourceTree = "<group>"; };
+		8031ACCB1C97175600AB6785 /* Parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Parser.h; sourceTree = "<group>"; };
+		8031ACCC1C97175600AB6785 /* Parser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Parser.m; sourceTree = "<group>"; };
 		80837FD81C919231004E2C45 /* NewsRSS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsRSS.h; sourceTree = "<group>"; };
 		80837FD91C919231004E2C45 /* NewsRSS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsRSS.m; sourceTree = "<group>"; };
 		80D158291C900C3D0020CEA0 /* RSSAppleNews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RSSAppleNews.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -121,6 +127,12 @@
 				80837FD91C919231004E2C45 /* NewsRSS.m */,
 				80D158621C900D540020CEA0 /* ReadRssTableViewController.h */,
 				80D158631C900D540020CEA0 /* ReadRssTableViewController.m */,
+				8031ACC81C9715F600AB6785 /* LoadingData.h */,
+				8031ACC91C9715F600AB6785 /* LoadingData.m */,
+				8031ACCB1C97175600AB6785 /* Parser.h */,
+				8031ACCC1C97175600AB6785 /* Parser.m */,
+				80D1586B1C904D3D0020CEA0 /* BrowserViewController.h */,
+				80D1586C1C904D3D0020CEA0 /* BrowserViewController.m */,
 				80D158351C900C3D0020CEA0 /* Main.storyboard */,
 				80D1583B1C900C3D0020CEA0 /* Assets.xcassets */,
 				80D1583D1C900C3D0020CEA0 /* LaunchScreen.storyboard */,
@@ -129,8 +141,6 @@
 				80D1582C1C900C3D0020CEA0 /* Supporting Files */,
 				80D158661C901EE90020CEA0 /* TableCellCustom.h */,
 				80D158671C901EE90020CEA0 /* TableCellCustom.m */,
-				80D1586B1C904D3D0020CEA0 /* BrowserViewController.h */,
-				80D1586C1C904D3D0020CEA0 /* BrowserViewController.m */,
 			);
 			path = RSSAppleNews;
 			sourceTree = "<group>";
@@ -228,6 +238,7 @@
 				TargetAttributes = {
 					80D158281C900C3D0020CEA0 = {
 						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = J69KN42852;
 					};
 					80D158441C900C3D0020CEA0 = {
 						CreatedOnToolsVersion = 7.2.1;
@@ -292,12 +303,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8031ACCA1C9715F600AB6785 /* LoadingData.m in Sources */,
 				80D1583A1C900C3D0020CEA0 /* RSSAppleNews.xcdatamodeld in Sources */,
 				80837FDA1C919231004E2C45 /* NewsRSS.m in Sources */,
 				80D158311C900C3D0020CEA0 /* AppDelegate.m in Sources */,
 				80D158681C901EE90020CEA0 /* TableCellCustom.m in Sources */,
 				80D158641C900D540020CEA0 /* ReadRssTableViewController.m in Sources */,
 				80D1582E1C900C3D0020CEA0 /* main.m in Sources */,
+				8031ACCD1C97175600AB6785 /* Parser.m in Sources */,
 				80D1586D1C904D3D0020CEA0 /* BrowserViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -437,6 +450,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = RSSAppleNews/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -449,6 +463,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = RSSAppleNews/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

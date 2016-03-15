@@ -17,11 +17,6 @@
 
 @implementation BrowserViewController
 
-- (void)viewDidUnload{
-    [super viewDidUnload];
-    self.myBrowser = nil;
-}
-
 - (void)viewDidLoad{
     [super viewDidLoad];
     
