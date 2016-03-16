@@ -15,6 +15,6 @@
 
 + (id)sharedMyManagerParser;
 - (void)startParser:(NSMutableData *)data;
-- (NSArray *)fetchedResultsControllerr;
+- (NSArray *)getNewsFromDatabase;
 
 @end

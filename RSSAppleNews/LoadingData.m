@@ -12,14 +12,16 @@
 
 + (instancetype)sharedMyManagerLoading {
     static LoadingData *sharedMyManager = nil;
+    
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         sharedMyManager = [[[self class] alloc] init];
     });
+    
     return sharedMyManager;
 }
 
-- (void)startConnction:(NSURL *)url{
+- (void)startConnection:(NSURL *)url{
     
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     NSURLRequest *theRequest=[NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10.0];
@@ -27,7 +29,8 @@
     
     if (theConnection) {
         self.rssData = [NSMutableData data];
-    } else {
+    }
+    else {
         NSLog(@"Connection failed");
     }
 }

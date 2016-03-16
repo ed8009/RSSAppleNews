@@ -26,19 +26,22 @@
 
 + (instancetype)sharedMyManagerParser {
     static Parser *sharedMyManager = nil;
+    
     static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^ {
+    dispatch_once(&onceToken, ^{
         sharedMyManager = [[[self class] alloc] init];
-
     });
+    
     return sharedMyManager;
 }
 
 - (instancetype)init {
-    if (self = [super init]) {
+    self = [super init];
+    if (self) {
         AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
         self.managedObjectContext = delegate.managedObjectContext;
     }
+    
     return self;
 }
 
@@ -62,11 +65,14 @@
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string {
     if ([self.currentElement isEqualToString:@"title"]) {
         [self.currentTitle appendString:string];
-    } else if ([self.currentElement isEqualToString:@"pubDate"]) {
+    }
+    else if ([self.currentElement isEqualToString:@"pubDate"]) {
         [self.pubDate appendString:string];
-    }else if ([self.currentElement isEqualToString:@"description"]) {
+    }
+    else if ([self.currentElement isEqualToString:@"description"]) {
         [self.currentDescription appendString:string];
-    }else if ([self.currentElement isEqualToString:@"link"]) {
+    }
+    else if ([self.currentElement isEqualToString:@"link"]) {
         [self.currentLink appendString:string];
     }
 }
@@ -87,28 +93,31 @@
     }
 }
 
-- (BOOL)sortArray:(NSString *)link {
+- (BOOL)newsDatabaseEqualTo:(NSString *)link {
     for (int i = 0; i < self.news.count; i++) {
         if ([link isEqualToString:self.news[i][@"link"]]) {
             return YES;
         }
     }
+    
     return NO;
 }
 
 - (void)parserDidEndDocument:(NSXMLParser *)parser {
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    [self getNewsFromDatabase];
     
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     if (self.newsCoreData.count != 0) {
         for (int i = 0; i < self.news.count; i++) {
             
-            NewsRSS *device = self.newsCoreData[i];
+            NewsRSS *newsRSS = self.newsCoreData[i];
             
-            if ([self sortArray:device.newsLink] == NO) {
+            if ([self newsDatabaseEqualTo:newsRSS.newsLink] == NO) {
                 [self saveDataBse:self.news[i]];
             }
         }
-    } else {
+    }
+    else {
         for(NSDictionary *item in self.news) {
             [self saveDataBse:item];
         }
@@ -132,9 +141,9 @@
     [newDevice setValue:date forKey:@"newsDate"];
     [newDevice setValue:[newsItem objectForKey:@"link"] forKey:@"newsLink"];
     
-    NSError *error = nil;
+    NSError *error;
     
-    if(![context save:&error]) {
+    if (![context save:&error]) {
         NSLog(@"Can't save! %@ %@", error, [error localizedDescription]);
     }
 }
@@ -143,8 +152,8 @@
     NSLog(@"%@", parseError);
 }
 
-
-- (NSArray *)fetchedResultsControllerr {
+- (NSArray *)getNewsFromDatabase {
+    
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"NewsRSS"];
 
     NSSortDescriptor *sort = [[NSSortDescriptor alloc] initWithKey:@"newsDate" ascending:NO];
@@ -152,10 +161,10 @@
     [fetchRequest setSortDescriptors:sortDescriptors];
     
     NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
-    NSFetchedResultsController *theFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
-                                                                                                  managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+    NSFetchedResultsController *theFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
     self.fetchedResultsController = theFetchedResultsController;
     self.newsCoreData = [managedObjectContext executeFetchRequest:fetchRequest error:nil];
+    
     return self.newsCoreData;
 }
 

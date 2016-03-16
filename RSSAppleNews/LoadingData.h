@@ -13,6 +13,6 @@
 @property (nonatomic, strong) NSMutableData *rssData;
 
 + (id)sharedMyManagerLoading;
-- (void)startConnction:(NSURL *)url;
+- (void)startConnection:(NSURL *)url;
 
 @end
