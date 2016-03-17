@@ -7,7 +7,7 @@
 //
 
 #import "ReadRssTableViewController.h"
-
+#import "TableCellCustom.h"
 @interface ReadRssTableViewController ()
 
 @property (nonatomic, strong) Parser *sharedMyManagerParser;
@@ -64,40 +64,50 @@
         cell.currentDate.text = @"";
         return cell;
     }
+    
+    [self setUpCell:cell atIndexPath:indexPath];
 
+    return cell;
+}
+
+- (void)setUpCell:(TableCellCustom *)cell atIndexPath:(NSIndexPath *)indexPath {
     NewsRSS *newsCoreData = [self.newsCoreData objectAtIndex:indexPath.row];
     
     NSDateFormatter *df = [NSDateFormatter new];
     [df setDateFormat:@"yyyy-mm-dd HH:mm"];
     df.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:[NSTimeZone localTimeZone].secondsFromGMT];
     NSString *localDateString = [df stringFromDate:newsCoreData.newsDate];
-
+    
     cell.currentTitle.text = newsCoreData.newsTitle;
     cell.currentDescription.text = newsCoreData.newsDescription;
     cell.currentDate.text = localDateString;
-    //NSLog(@"%@",newsCoreData.newsDate);
-    return cell;
 }
 
  - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
      NewsRSS *newsCoreData = [self.newsCoreData objectAtIndex:indexPath.row];
-     TableCellCustom *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
- 
+     
+     static TableCellCustom *cell = nil;
+     static dispatch_once_t onceToken;
+     
+     dispatch_once(&onceToken, ^{
+         cell = [self.tableView dequeueReusableCellWithIdentifier:@"Cell"];
+     });
+     
      NSDateFormatter *newsDate = [NSDateFormatter new];
      [newsDate setDateFormat:@"yyyy-mm-dd HH:mm"];
      newsDate.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:[NSTimeZone localTimeZone].secondsFromGMT];
  
-     int topPaddingTitle = CGRectGetMinX(cell.currentTitle.frame);
-     int topPaddingDescription = CGRectGetMinX(cell.currentDescription.frame);
-     int topPaddingDate = CGRectGetMinX(cell.currentDate.frame);
+     int topPaddingTitle = CGRectGetMinY(cell.currentTitle.frame);
+     int topPaddingDescription = CGRectGetMinY(cell.currentDescription.frame);
+     int topPaddingDate = CGRectGetMinY(cell.currentDate.frame);
  
      int bottomPadding = CGRectGetHeight(cell.frame) - (topPaddingTitle + topPaddingDescription + topPaddingDate + CGRectGetHeight(cell.currentTitle.frame) + CGRectGetHeight(cell.currentDescription.frame) + CGRectGetHeight(cell.currentDate.frame));
  
-     CGFloat getCellHeightWithTextTitle = CGRectGetHeight([newsCoreData.newsTitle boundingRectWithSize:CGSizeMake(CGRectGetWidth(cell.currentTitle.frame), CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: cell.currentTitle.font} context:nil]);
+     CGFloat getCellHeightWithTextTitle = CGRectGetHeight([newsCoreData.newsTitle boundingRectWithSize:CGSizeMake(CGRectGetWidth(self.tableView.frame) - CGRectGetMinX(cell.currentTitle.frame)*2, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: cell.currentTitle.font} context:nil]);
  
-     CGFloat getCellHeightWithTextDescription = CGRectGetHeight([newsCoreData.newsDescription boundingRectWithSize:CGSizeMake(CGRectGetWidth(cell.currentDescription.frame), CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: cell.currentDescription.font} context:nil]);
+     CGFloat getCellHeightWithTextDescription = CGRectGetHeight([newsCoreData.newsDescription boundingRectWithSize:CGSizeMake(CGRectGetWidth(self.tableView.frame) - CGRectGetMinX(cell.currentDescription.frame)*2, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: cell.currentDescription.font} context:nil]);
  
-     CGFloat getCellHeightWithTextDate = CGRectGetHeight([[newsDate stringFromDate:newsCoreData.newsDate] boundingRectWithSize:CGSizeMake(CGRectGetWidth(cell.currentDate.frame), CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: cell.currentDate.font} context:nil]);
+     CGFloat getCellHeightWithTextDate = CGRectGetHeight([[newsDate stringFromDate:newsCoreData.newsDate] boundingRectWithSize:CGSizeMake(CGRectGetWidth(self.tableView.frame) - CGRectGetMinX(cell.currentDate.frame)*2, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: cell.currentDate.font} context:nil]);
 
      CGFloat value = topPaddingTitle + topPaddingDescription + topPaddingDate + getCellHeightWithTextTitle + getCellHeightWithTextDescription + getCellHeightWithTextDate + bottomPadding;
      

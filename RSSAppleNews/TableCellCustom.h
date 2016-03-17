@@ -13,4 +13,5 @@
 @property (nonatomic, weak) IBOutlet UILabel *currentTitle;
 @property (nonatomic, weak) IBOutlet UILabel *currentDescription;
 @property (nonatomic, weak) IBOutlet UILabel *currentDate;
+
 @end

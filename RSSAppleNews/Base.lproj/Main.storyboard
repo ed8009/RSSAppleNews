@@ -15,11 +15,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="75" id="PvW-Of-9Lh" customClass="TableCellCustom">
-                                <rect key="frame" x="0.0" y="92" width="320" height="75"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="81" id="PvW-Of-9Lh" customClass="TableCellCustom">
+                                <rect key="frame" x="0.0" y="92" width="320" height="81"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PvW-Of-9Lh" id="v7l-45-DBd">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="74"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tm4-JD-xEC">
@@ -47,12 +47,18 @@
                                         <constraint firstItem="fWQ-VD-pKI" firstAttribute="trailing" secondItem="v7l-45-DBd" secondAttribute="trailingMargin" id="94h-mj-seY"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="mwX-nQ-bM6" secondAttribute="bottom" constant="-6" id="BTz-vl-V9i"/>
                                         <constraint firstItem="tm4-JD-xEC" firstAttribute="trailing" secondItem="v7l-45-DBd" secondAttribute="trailingMargin" id="Cgq-g9-sVE"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="mwX-nQ-bM6" secondAttribute="bottom" id="HRO-mr-LoD"/>
                                         <constraint firstItem="fWQ-VD-pKI" firstAttribute="top" secondItem="tm4-JD-xEC" secondAttribute="bottom" id="R3h-Fh-lXa"/>
                                         <constraint firstItem="tm4-JD-xEC" firstAttribute="top" secondItem="v7l-45-DBd" secondAttribute="topMargin" id="bOL-xU-hqM"/>
                                         <constraint firstItem="mwX-nQ-bM6" firstAttribute="leading" secondItem="v7l-45-DBd" secondAttribute="leadingMargin" id="gQ5-uY-Tgg"/>
                                         <constraint firstItem="tm4-JD-xEC" firstAttribute="leading" secondItem="v7l-45-DBd" secondAttribute="leadingMargin" id="lAE-9q-ymq"/>
                                         <constraint firstItem="mwX-nQ-bM6" firstAttribute="top" secondItem="fWQ-VD-pKI" secondAttribute="bottom" constant="1" id="uSL-nA-PaV"/>
                                     </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="BTz-vl-V9i"/>
+                                        </mask>
+                                    </variation>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="currentDate" destination="mwX-nQ-bM6" id="st3-gt-b1c"/>
