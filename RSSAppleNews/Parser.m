@@ -111,26 +111,26 @@
         for (int i = 0; i < self.news.count; i++) {
             
             NewsRSS *newsRSS = self.newsCoreData[i];
-            
             if ([self newsDatabaseEqualTo:newsRSS.newsLink] == NO) {
-                [self saveDataBse:self.news[i]];
+                [self saveDataBase:self.news[i]];
             }
         }
     }
     else {
         for(NSDictionary *item in self.news) {
-            [self saveDataBse:item];
+            [self saveDataBase:item];
         }
     }
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"ParserDidFinish" object:nil];
 }
 
-- (void)saveDataBse:(NSDictionary *)newsItem {
+- (void)saveDataBase:(NSDictionary *)newsItem {
     NSManagedObjectContext *context = self.managedObjectContext;
     
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"EEE, dd MMM yyyy HH:mm:ss zzz"];
+    [dateFormat setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
     NSString *str = [NSString stringWithFormat:@"%@",[newsItem objectForKey:@"pubDate"]];
     str = [str stringByReplacingOccurrencesOfString:@"\n" withString:@""];
     NSDate *date =  [dateFormat dateFromString:str ];
@@ -142,7 +142,7 @@
     [newDevice setValue:[newsItem objectForKey:@"link"] forKey:@"newsLink"];
     
     NSError *error;
-    
+
     if (![context save:&error]) {
         NSLog(@"Can't save! %@ %@", error, [error localizedDescription]);
     }

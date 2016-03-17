@@ -75,7 +75,7 @@
     cell.currentTitle.text = newsCoreData.newsTitle;
     cell.currentDescription.text = newsCoreData.newsDescription;
     cell.currentDate.text = localDateString;
-    
+    //NSLog(@"%@",newsCoreData.newsDate);
     return cell;
 }
 
