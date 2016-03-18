@@ -15,8 +15,6 @@
 @property (nonatomic, strong) NSMutableString *currentTitle;
 @property (nonatomic, strong) NSMutableString *pubDate;
 @property (nonatomic, strong) NSMutableString *currentLink;
-@property (nonatomic, strong) NSArray* newsCoreData;
-@property (nonatomic, strong) NSMutableArray *news;
 @property (nonatomic, strong) NSManagedObjectContext* managedObjectContext;
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 
@@ -46,7 +44,6 @@
 }
 
 - (void)startParser:(NSMutableData *)data {
-    self.news = [NSMutableArray array];
     NSXMLParser *rssParser = [[NSXMLParser alloc] initWithData:data];
     rssParser.delegate = self;
     [rssParser parse];
@@ -72,56 +69,31 @@
     else if ([self.currentElement isEqualToString:@"description"]) {
         [self.currentDescription appendString:string];
     }
-    else if ([self.currentElement isEqualToString:@"link"]) {
+    else if ([self.currentElement isEqualToString:@"link"] && ![string isEqualToString:@"\n"]) {
         [self.currentLink appendString:string];
     }
 }
 
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
     if ([elementName isEqualToString:@"item"]) {
-        NSDictionary *newsItem = [NSDictionary dictionaryWithObjectsAndKeys:
-                                  self.currentTitle, @"title",
-                                  self.pubDate, @"pubDate",
-                                  self.currentDescription, @"description",
-                                  self.currentLink, @"link", nil];
-        [self.news addObject:newsItem];
-        self.currentTitle = nil;
-        self.pubDate = nil;
-        self.currentElement = nil;
-        self.currentDescription = nil;
-        self.currentLink = nil;
-    }
-}
+        if (![self Comparison:[NSString stringWithFormat:@"%@\n",self.currentLink]]) {
+            NSDictionary *newsItem = [NSDictionary dictionaryWithObjectsAndKeys:
+                                      self.currentTitle, @"title",
+                                      self.pubDate, @"pubDate",
+                                      self.currentDescription, @"description",
+                                      self.currentLink, @"link", nil];
+            [self saveDataBase:newsItem];
 
-- (BOOL)newsDatabaseEqualTo:(NSString *)link {
-    for (int i = 0; i < self.news.count; i++) {
-        if ([link isEqualToString:self.news[i][@"link"]]) {
-            return YES;
+            self.currentTitle = nil;
+            self.pubDate = nil;
+            self.currentElement = nil;
+            self.currentDescription = nil;
+            self.currentLink = nil;
         }
     }
-    
-    return NO;
 }
 
 - (void)parserDidEndDocument:(NSXMLParser *)parser {
-    [self getNewsFromDatabase];
-    
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-    if (self.newsCoreData.count != 0) {
-        for (int i = 0; i < self.news.count; i++) {
-            
-            NewsRSS *newsRSS = self.newsCoreData[i];
-            if ([self newsDatabaseEqualTo:newsRSS.newsLink] == NO) {
-                [self saveDataBase:self.news[i]];
-            }
-        }
-    }
-    else {
-        for(NSDictionary *item in self.news) {
-            [self saveDataBase:item];
-        }
-    }
-    
     [[NSNotificationCenter defaultCenter] postNotificationName:@"ParserDidFinish" object:nil];
 }
 
@@ -152,8 +124,26 @@
     NSLog(@"%@", parseError);
 }
 
-- (NSArray *)getNewsFromDatabase {
+- (BOOL)Comparison:(NSString *)link{
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"NewsRSS" inManagedObjectContext:self.managedObjectContext];
     
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:entity];
+    [request setFetchLimit:1];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"newsLink == %@", link]];
+    
+    NSError *error = nil;
+    NSUInteger count = [self.managedObjectContext countForFetchRequest:request error:&error];
+    
+    if (count){
+        return YES;
+    }
+    else{
+        return NO;
+    }
+}
+
+- (NSArray *)getNewsFromDatabase {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"NewsRSS"];
 
     NSSortDescriptor *sort = [[NSSortDescriptor alloc] initWithKey:@"newsDate" ascending:NO];
@@ -163,9 +153,8 @@
     NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
     NSFetchedResultsController *theFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
     self.fetchedResultsController = theFetchedResultsController;
-    self.newsCoreData = [managedObjectContext executeFetchRequest:fetchRequest error:nil];
     
-    return self.newsCoreData;
+    return [managedObjectContext executeFetchRequest:fetchRequest error:nil];
 }
 
 @end

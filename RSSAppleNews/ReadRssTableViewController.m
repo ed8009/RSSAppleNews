@@ -8,6 +8,7 @@
 
 #import "ReadRssTableViewController.h"
 #import "TableCellCustom.h"
+
 @interface ReadRssTableViewController ()
 
 @property (nonatomic, strong) Parser *sharedMyManagerParser;
@@ -27,8 +28,6 @@
 
     self.sharedMyManagerLoading = [LoadingData sharedMyManagerLoading];
     [self.sharedMyManagerLoading startConnection:[NSURL URLWithString:@"http://images.apple.com/main/rss/hotnews/hotnews.rss"]];
-
-    [self.tableView reloadData];
 }
 
 #pragma mark - Private Methods
@@ -45,10 +44,6 @@
 
 #pragma mark - UITableViewDataSource and UITableViewDelegate
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.newsCoreData.count;
 }
@@ -58,15 +53,8 @@
 
     TableCellCustom *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    if (cell == nil) {
-        cell.currentTitle.text = @"";
-        cell.currentDescription.text = @"";
-        cell.currentDate.text = @"";
-        return cell;
-    }
-    
     [self setUpCell:cell atIndexPath:indexPath];
-
+    
     return cell;
 }
 
