@@ -76,7 +76,7 @@
 
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
     if ([elementName isEqualToString:@"item"]) {
-        if (![self Comparison:[NSString stringWithFormat:@"%@\n",self.currentLink]]) {
+        if (![self comparisonItemForDatabase:[NSString stringWithFormat:@"%@\n",self.currentLink]]) {
             NSDictionary *newsItem = [NSDictionary dictionaryWithObjectsAndKeys:
                                       self.currentTitle, @"title",
                                       self.pubDate, @"pubDate",
