@@ -124,7 +124,7 @@
     NSLog(@"%@", parseError);
 }
 
-- (BOOL)Comparison:(NSString *)link{
+- (BOOL)comparisonItemForDatabase:(NSString *)link{
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"NewsRSS" inManagedObjectContext:self.managedObjectContext];
     
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
