@@ -29,7 +29,7 @@
     dispatch_once(&onceToken, ^{
         sharedMyManager = [[[self class] alloc] init];
     });
-    
+
     return sharedMyManager;
 }
 
@@ -50,6 +50,7 @@
 }
 
 - (void)parser:(NSXMLParser *)parser didStartElement:(nonnull NSString *)elementName namespaceURI:(nullable NSString *)namespaceURI qualifiedName:(nullable NSString *)qName attributes:(nonnull NSDictionary<NSString *,NSString *> *)attributeDict {
+
     self.currentElement = elementName;
     if ([elementName isEqualToString:@"item"]) {
         self.currentTitle = [NSMutableString string];
@@ -60,23 +61,25 @@
 }
 
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string {
-    if ([self.currentElement isEqualToString:@"title"]) {
-        [self.currentTitle appendString:string];
-    }
-    else if ([self.currentElement isEqualToString:@"pubDate"]) {
-        [self.pubDate appendString:string];
-    }
-    else if ([self.currentElement isEqualToString:@"description"]) {
-        [self.currentDescription appendString:string];
-    }
-    else if ([self.currentElement isEqualToString:@"link"] && ![string isEqualToString:@"\n"]) {
-        [self.currentLink appendString:string];
+    if (![string isEqualToString:@"\n"]){
+        if ([self.currentElement isEqualToString:@"title"]) {
+            [self.currentTitle appendString:string];
+        }
+        else if ([self.currentElement isEqualToString:@"pubDate"]) {
+            [self.pubDate appendString:string];
+        }
+        else if ([self.currentElement isEqualToString:@"description"]) {
+            [self.currentDescription appendString:string];
+        }
+        else if ([self.currentElement isEqualToString:@"link"]) {
+            [self.currentLink appendString:string];
+        }
     }
 }
 
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
     if ([elementName isEqualToString:@"item"]) {
-        if (![self comparisonItemForDatabase:[NSString stringWithFormat:@"%@\n",self.currentLink]]) {
+        if (![self essenceExistsInDatabase:self.currentLink]) {
             NSDictionary *newsItem = [NSDictionary dictionaryWithObjectsAndKeys:
                                       self.currentTitle, @"title",
                                       self.pubDate, @"pubDate",
@@ -97,21 +100,34 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"ParserDidFinish" object:nil];
 }
 
+- (NSString *) userOutputDateOnlyFormatter:(NSDate *)date {
+    static NSDateFormatter * dateFormatter;
+    
+    if (dateFormatter == nil) {
+        dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm"];
+        [dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:[NSTimeZone localTimeZone].secondsFromGMT]];
+    }
+    
+    return [dateFormatter stringFromDate:date];
+}
+
 - (void)saveDataBase:(NSDictionary *)newsItem {
     NSManagedObjectContext *context = self.managedObjectContext;
-    
-    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat:@"EEE, dd MMM yyyy HH:mm:ss zzz"];
-    [dateFormat setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
-    NSString *str = [NSString stringWithFormat:@"%@",[newsItem objectForKey:@"pubDate"]];
-    str = [str stringByReplacingOccurrencesOfString:@"\n" withString:@""];
-    NSDate *date =  [dateFormat dateFromString:str ];
+
+    static NSDateFormatter * dateFormatter;
+    if (dateFormatter == nil) {
+        dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"EEE, dd MMM yyyy HH:mm:ss zzz"];
+        [dateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
+    }
+    NSDate *date =  [dateFormatter dateFromString:newsItem[@"pubDate"]];
     
     NSManagedObject *newDevice = [NSEntityDescription insertNewObjectForEntityForName:@"NewsRSS" inManagedObjectContext:context];
-    [newDevice setValue:[newsItem objectForKey:@"title"] forKey:@"newsTitle"];
-    [newDevice setValue:[newsItem objectForKey:@"description"] forKey:@"newsDescription"];
+    [newDevice setValue:newsItem[@"title"] forKey:@"newsTitle"];
+    [newDevice setValue:newsItem[@"description"] forKey:@"newsDescription"];
     [newDevice setValue:date forKey:@"newsDate"];
-    [newDevice setValue:[newsItem objectForKey:@"link"] forKey:@"newsLink"];
+    [newDevice setValue:newsItem[@"link"] forKey:@"newsLink"];
     
     NSError *error;
 
@@ -124,7 +140,7 @@
     NSLog(@"%@", parseError);
 }
 
-- (BOOL)comparisonItemForDatabase:(NSString *)link{
+- (BOOL)essenceExistsInDatabase:(NSString *)link{
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"NewsRSS" inManagedObjectContext:self.managedObjectContext];
     
     NSFetchRequest *request = [[NSFetchRequest alloc] init];

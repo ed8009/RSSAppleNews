@@ -45,6 +45,8 @@
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
     NSLog(@"%@", error);
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"ParserDidFinish" object:nil];
+
 }
 
 @end
