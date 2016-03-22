@@ -86,11 +86,11 @@
          cell = [self.tableView dequeueReusableCellWithIdentifier:@"Cell"];
      });
      
-     int topPaddingTitle = CGRectGetMinY(cell.currentTitle.frame);
-     int topPaddingDescription = CGRectGetMinY(cell.currentDescription.frame);
-     int topPaddingDate = CGRectGetMinY(cell.currentDate.frame);
- 
-     int bottomPadding = CGRectGetHeight(cell.frame) - (topPaddingTitle + topPaddingDescription + topPaddingDate + CGRectGetHeight(cell.currentTitle.frame) + CGRectGetHeight(cell.currentDescription.frame) + CGRectGetHeight(cell.currentDate.frame));
+     CGFloat topPaddingTitle = CGRectGetMinY(cell.currentTitle.frame);
+     CGFloat topPaddingDescription = CGRectGetMinY(cell.currentDescription.frame) - CGRectGetHeight(cell.currentTitle.frame) - topPaddingTitle;
+     CGFloat topPaddingDate = CGRectGetMinY(cell.currentDate.frame) - CGRectGetHeight(cell.currentDescription.frame) - CGRectGetMinY(cell.currentDescription.frame);
+     
+     CGFloat bottomPadding = CGRectGetHeight(cell.frame) - (topPaddingTitle + topPaddingDescription + topPaddingDate + CGRectGetHeight(cell.currentTitle.frame) + CGRectGetHeight(cell.currentDescription.frame) + CGRectGetHeight(cell.currentDate.frame));
  
      CGFloat getCellHeightWithTextTitle = CGRectGetHeight([newsCoreData.newsTitle boundingRectWithSize:CGSizeMake(CGRectGetWidth(self.tableView.frame) - CGRectGetMinX(cell.currentTitle.frame)*2, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: cell.currentTitle.font} context:nil]);
  
@@ -98,7 +98,15 @@
  
      CGFloat getCellHeightWithTextDate = CGRectGetHeight([[self createStringFromDate:newsCoreData.newsDate] boundingRectWithSize:CGSizeMake(CGRectGetWidth(self.tableView.frame) - CGRectGetMinX(cell.currentDate.frame)*2, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: cell.currentDate.font} context:nil]);
 
-     CGFloat value = topPaddingTitle + topPaddingDescription + topPaddingDate + getCellHeightWithTextTitle + getCellHeightWithTextDescription + getCellHeightWithTextDate + bottomPadding;
+     CGFloat value = topPaddingTitle + topPaddingDescription + topPaddingDate + getCellHeightWithTextTitle + getCellHeightWithTextDescription + getCellHeightWithTextDate + bottomPadding*2;
+     
+     NSLog(@"%f",topPaddingTitle);
+     NSLog(@"%f",topPaddingDescription);
+     NSLog(@"%f",topPaddingDate);
+     NSLog(@"%f\n",bottomPadding);
+
+
+
      
      return value;
  }
