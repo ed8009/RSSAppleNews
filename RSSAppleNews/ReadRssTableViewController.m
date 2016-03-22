@@ -99,15 +99,7 @@
      CGFloat getCellHeightWithTextDate = CGRectGetHeight([[self createStringFromDate:newsCoreData.newsDate] boundingRectWithSize:CGSizeMake(CGRectGetWidth(self.tableView.frame) - CGRectGetMinX(cell.currentDate.frame)*2, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: cell.currentDate.font} context:nil]);
 
      CGFloat value = topPaddingTitle + topPaddingDescription + topPaddingDate + getCellHeightWithTextTitle + getCellHeightWithTextDescription + getCellHeightWithTextDate + bottomPadding*2;
-     
-     NSLog(@"%f",topPaddingTitle);
-     NSLog(@"%f",topPaddingDescription);
-     NSLog(@"%f",topPaddingDate);
-     NSLog(@"%f\n",bottomPadding);
 
-
-
-     
      return value;
  }
 
