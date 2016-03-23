@@ -100,18 +100,6 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"ParserDidFinish" object:nil];
 }
 
-- (NSString *) userOutputDateOnlyFormatter:(NSDate *)date {
-    static NSDateFormatter * dateFormatter;
-    
-    if (dateFormatter == nil) {
-        dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm"];
-        [dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:[NSTimeZone localTimeZone].secondsFromGMT]];
-    }
-    
-    return [dateFormatter stringFromDate:date];
-}
-
 - (void)saveDataBase:(NSDictionary *)newsItem {
     NSManagedObjectContext *context = self.managedObjectContext;
 
