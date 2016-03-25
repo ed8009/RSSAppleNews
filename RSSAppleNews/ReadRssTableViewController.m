@@ -48,7 +48,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"Cell";
-
+    
     TableCellCustom *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     [self setUpCell:cell atIndexPath:indexPath];
@@ -76,40 +76,40 @@
     cell.currentDate.text = [self createStringFromDate:newsCoreData.newsDate];
 }
 
- - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-     NewsRSS *newsCoreData = self.newsCoreData[indexPath.row];
-     
-     static TableCellCustom *cell = nil;
-     static dispatch_once_t onceToken;
-     
-     dispatch_once(&onceToken, ^{
-         cell = [self.tableView dequeueReusableCellWithIdentifier:@"Cell"];
-     });
-     
-     CGFloat topPaddingTitle = CGRectGetMinY(cell.currentTitle.frame);
-     CGFloat topPaddingDescription = CGRectGetMinY(cell.currentDescription.frame) - CGRectGetHeight(cell.currentTitle.frame) - topPaddingTitle;
-     CGFloat topPaddingDate = CGRectGetMinY(cell.currentDate.frame) - CGRectGetHeight(cell.currentDescription.frame) - CGRectGetMinY(cell.currentDescription.frame);
-     
-     CGFloat bottomPadding = CGRectGetHeight(cell.frame) - (topPaddingTitle + topPaddingDescription + topPaddingDate + CGRectGetHeight(cell.currentTitle.frame) + CGRectGetHeight(cell.currentDescription.frame) + CGRectGetHeight(cell.currentDate.frame));
- 
-     CGFloat getCellHeightWithTextTitle = CGRectGetHeight([newsCoreData.newsTitle boundingRectWithSize:CGSizeMake(CGRectGetWidth(self.tableView.frame) - CGRectGetMinX(cell.currentTitle.frame)*2, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: cell.currentTitle.font} context:nil]);
- 
-     CGFloat getCellHeightWithTextDescription = CGRectGetHeight([newsCoreData.newsDescription boundingRectWithSize:CGSizeMake(CGRectGetWidth(self.tableView.frame) - CGRectGetMinX(cell.currentDescription.frame)*2, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: cell.currentDescription.font} context:nil]);
- 
-     CGFloat getCellHeightWithTextDate = CGRectGetHeight([[self createStringFromDate:newsCoreData.newsDate] boundingRectWithSize:CGSizeMake(CGRectGetWidth(self.tableView.frame) - CGRectGetMinX(cell.currentDate.frame)*2, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: cell.currentDate.font} context:nil]);
-
-     CGFloat value = topPaddingTitle + topPaddingDescription + topPaddingDate + getCellHeightWithTextTitle + getCellHeightWithTextDescription + getCellHeightWithTextDate + bottomPadding*2;
-
-     return value;
- }
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NewsRSS *newsCoreData = self.newsCoreData[indexPath.row];
+    
+    static TableCellCustom *cell = nil;
+    static dispatch_once_t onceToken;
+    
+    dispatch_once(&onceToken, ^{
+        cell = [self.tableView dequeueReusableCellWithIdentifier:@"Cell"];
+    });
+    
+    CGFloat topPaddingTitle = CGRectGetMinY(cell.currentTitle.frame);
+    CGFloat topPaddingDescription = CGRectGetMinY(cell.currentDescription.frame) - CGRectGetHeight(cell.currentTitle.frame) - topPaddingTitle;
+    CGFloat topPaddingDate = CGRectGetMinY(cell.currentDate.frame) - CGRectGetHeight(cell.currentDescription.frame) - CGRectGetMinY(cell.currentDescription.frame);
+    
+    CGFloat bottomPadding = CGRectGetHeight(cell.frame) - (topPaddingTitle + topPaddingDescription + topPaddingDate + CGRectGetHeight(cell.currentTitle.frame) + CGRectGetHeight(cell.currentDescription.frame) + CGRectGetHeight(cell.currentDate.frame));
+    
+    CGFloat getCellHeightWithTextTitle = CGRectGetHeight([newsCoreData.newsTitle boundingRectWithSize:CGSizeMake(CGRectGetWidth(self.tableView.frame) - CGRectGetMinX(cell.currentTitle.frame)*2, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: cell.currentTitle.font} context:nil]);
+    
+    CGFloat getCellHeightWithTextDescription = CGRectGetHeight([newsCoreData.newsDescription boundingRectWithSize:CGSizeMake(CGRectGetWidth(self.tableView.frame) - CGRectGetMinX(cell.currentDescription.frame)*2, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: cell.currentDescription.font} context:nil]);
+    
+    CGFloat getCellHeightWithTextDate = CGRectGetHeight([[self createStringFromDate:newsCoreData.newsDate] boundingRectWithSize:CGSizeMake(CGRectGetWidth(self.tableView.frame) - CGRectGetMinX(cell.currentDate.frame)*2, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: cell.currentDate.font} context:nil]);
+    
+    CGFloat value = topPaddingTitle + topPaddingDescription + topPaddingDate + getCellHeightWithTextTitle + getCellHeightWithTextDescription + getCellHeightWithTextDate + bottomPadding*2;
+    
+    return value;
+}
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"browserSeque"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         NewsRSS *newsCoreData = self.newsCoreData[indexPath.row];
-
+        
         BrowserViewController *browser = [segue destinationViewController];
-        browser.url = [NSString stringWithFormat:@"%@",newsCoreData.newsLink];
+        browser.url = newsCoreData.newsLink;
     }
 }
 

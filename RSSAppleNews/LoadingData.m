@@ -21,8 +21,7 @@
     return sharedMyManager;
 }
 
-- (void)startConnection:(NSURL *)url{
-    
+- (void)startConnection:(NSURL *)url {
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     NSURLRequest *theRequest=[NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10.0];
     NSURLConnection *theConnection=[[NSURLConnection alloc] initWithRequest:theRequest delegate:self];
@@ -46,7 +45,6 @@
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
     NSLog(@"%@", error);
     [[NSNotificationCenter defaultCenter] postNotificationName:@"ParserDidFinish" object:nil];
-
 }
 
 @end

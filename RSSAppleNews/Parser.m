@@ -128,21 +128,21 @@
     NSLog(@"%@", parseError);
 }
 
-- (BOOL)essenceExistsInDatabase:(NSString *)link{
+- (BOOL)essenceExistsInDatabase:(NSString *)link {
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"NewsRSS" inManagedObjectContext:self.managedObjectContext];
     
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    [request setEntity:entity];
-    [request setFetchLimit:1];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"newsLink == %@", link]];
+    request.entity = entity;
+    request.fetchLimit = 1;
+    request.predicate = [NSPredicate predicateWithFormat:@"newsLink == %@", link];
     
     NSError *error = nil;
     NSUInteger count = [self.managedObjectContext countForFetchRequest:request error:&error];
     
-    if (count){
+    if (count) {
         return YES;
     }
-    else{
+    else {
         return NO;
     }
 }

@@ -17,7 +17,7 @@
 
 @implementation BrowserViewController
 
-- (void)viewDidLoad{
+- (void)viewDidLoad {
     [super viewDidLoad];
     
     self.labelErrorConnect.hidden = YES;
@@ -28,19 +28,19 @@
     [self.myBrowser loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:webStringURL]]];
 }
 
-- (void)webViewDidStartLoad:(UIWebView *)webView{
+- (void)webViewDidStartLoad:(UIWebView *)webView {
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     
     NSLog(@"Start load");
 }
 
-- (void)webViewDidFinishLoad:(UIWebView *)webView{
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     
     NSLog(@"Finish load");
 }
 
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
     NSLog(@"%@", error);
 
     self.labelErrorConnect.hidden = NO;
