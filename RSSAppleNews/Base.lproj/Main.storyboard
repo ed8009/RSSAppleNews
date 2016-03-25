@@ -92,9 +92,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <webView contentMode="scaleToFill" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="swH-Tn-hV4">
-                                <rect key="frame" x="-8" y="0.0" width="336" height="568"/>
-                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
+                            <webView opaque="NO" contentMode="scaleToFill" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="swH-Tn-hV4">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </webView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No connect to the Internet" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H8Y-rd-WyV">
                                 <rect key="frame" x="58" y="272" width="204" height="24"/>
@@ -108,10 +108,22 @@
                             <constraint firstItem="swH-Tn-hV4" firstAttribute="top" secondItem="7al-vE-Gg7" secondAttribute="bottom" constant="-64" id="3Sx-lj-w0t"/>
                             <constraint firstItem="H8Y-rd-WyV" firstAttribute="centerY" secondItem="jTr-tZ-cgn" secondAttribute="centerY" id="4Zq-Dz-WYW"/>
                             <constraint firstItem="swH-Tn-hV4" firstAttribute="leading" secondItem="jTr-tZ-cgn" secondAttribute="leadingMargin" constant="-24" id="7Vk-5Z-Uz9"/>
+                            <constraint firstAttribute="trailing" secondItem="swH-Tn-hV4" secondAttribute="trailing" id="PPt-u4-B07"/>
+                            <constraint firstItem="swH-Tn-hV4" firstAttribute="top" secondItem="jTr-tZ-cgn" secondAttribute="top" id="QFY-d3-NVM"/>
+                            <constraint firstItem="swH-Tn-hV4" firstAttribute="leading" secondItem="jTr-tZ-cgn" secondAttribute="leading" id="QKO-cD-7GC"/>
                             <constraint firstItem="H8Y-rd-WyV" firstAttribute="centerX" secondItem="jTr-tZ-cgn" secondAttribute="centerX" id="YNk-D5-5Dd"/>
                             <constraint firstItem="G1f-rw-IYm" firstAttribute="top" secondItem="swH-Tn-hV4" secondAttribute="bottom" id="d1R-9V-Pse"/>
+                            <constraint firstItem="G1f-rw-IYm" firstAttribute="top" secondItem="swH-Tn-hV4" secondAttribute="bottom" id="eZG-QP-fC8"/>
                             <constraint firstAttribute="trailingMargin" secondItem="swH-Tn-hV4" secondAttribute="trailing" constant="-24" id="pif-9Z-TmV"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="3Sx-lj-w0t"/>
+                                <exclude reference="7Vk-5Z-Uz9"/>
+                                <exclude reference="pif-9Z-TmV"/>
+                                <exclude reference="d1R-9V-Pse"/>
+                            </mask>
+                        </variation>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
