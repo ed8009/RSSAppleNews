@@ -20,7 +20,7 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     
-    self.labelErrorConnect.hidden = true;
+    self.labelErrorConnect.hidden = YES;
     self.myBrowser.delegate = self;
     
     NSString* webStringURL = [self.url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
@@ -43,7 +43,7 @@
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
     NSLog(@"%@", error);
 
-    self.labelErrorConnect.hidden = false;
+    self.labelErrorConnect.hidden = NO;
 }
 
 @end
