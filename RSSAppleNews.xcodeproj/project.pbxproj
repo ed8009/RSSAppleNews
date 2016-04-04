@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		8031ACCA1C9715F600AB6785 /* LoadingData.m in Sources */ = {isa = PBXBuildFile; fileRef = 8031ACC91C9715F600AB6785 /* LoadingData.m */; };
 		8031ACCD1C97175600AB6785 /* Parser.m in Sources */ = {isa = PBXBuildFile; fileRef = 8031ACCC1C97175600AB6785 /* Parser.m */; };
-		80837FDA1C919231004E2C45 /* NewsRSS.m in Sources */ = {isa = PBXBuildFile; fileRef = 80837FD91C919231004E2C45 /* NewsRSS.m */; };
 		80D1582E1C900C3D0020CEA0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 80D1582D1C900C3D0020CEA0 /* main.m */; };
 		80D158311C900C3D0020CEA0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 80D158301C900C3D0020CEA0 /* AppDelegate.m */; };
 		80D158371C900C3D0020CEA0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 80D158351C900C3D0020CEA0 /* Main.storyboard */; };
@@ -21,6 +20,14 @@
 		80D158641C900D540020CEA0 /* ReadRssTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 80D158631C900D540020CEA0 /* ReadRssTableViewController.m */; };
 		80D158681C901EE90020CEA0 /* TableCellCustom.m in Sources */ = {isa = PBXBuildFile; fileRef = 80D158671C901EE90020CEA0 /* TableCellCustom.m */; };
 		80D1586D1C904D3D0020CEA0 /* BrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 80D1586C1C904D3D0020CEA0 /* BrowserViewController.m */; };
+		A6EB8C651CA2D6CF00A84DCF /* AddRSSFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6EB8C641CA2D6CF00A84DCF /* AddRSSFeedViewController.m */; };
+		A6EB8C681CA2FB3B00A84DCF /* CatalogRSSFeedTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6EB8C671CA2FB3B00A84DCF /* CatalogRSSFeedTableViewController.m */; };
+		A6EB8C6D1CA3319700A84DCF /* UserRSSFeedTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6EB8C6C1CA3319700A84DCF /* UserRSSFeedTableViewController.m */; };
+		A6EB8C791CA3E47100A84DCF /* RSSDetails+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A6EB8C721CA3E47100A84DCF /* RSSDetails+CoreDataProperties.m */; };
+		A6EB8C7A1CA3E47100A84DCF /* RSSDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = A6EB8C741CA3E47100A84DCF /* RSSDetails.m */; };
+		A6EB8C7B1CA3E47100A84DCF /* RSSnews+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A6EB8C761CA3E47100A84DCF /* RSSnews+CoreDataProperties.m */; };
+		A6EB8C7C1CA3E47100A84DCF /* RSSnews.m in Sources */ = {isa = PBXBuildFile; fileRef = A6EB8C781CA3E47100A84DCF /* RSSnews.m */; };
+		A6EB8C7F1CA410A100A84DCF /* WorkingWithCoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = A6EB8C7E1CA410A100A84DCF /* WorkingWithCoreData.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,8 +52,6 @@
 		8031ACC91C9715F600AB6785 /* LoadingData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingData.m; sourceTree = "<group>"; };
 		8031ACCB1C97175600AB6785 /* Parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Parser.h; sourceTree = "<group>"; };
 		8031ACCC1C97175600AB6785 /* Parser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Parser.m; sourceTree = "<group>"; };
-		80837FD81C919231004E2C45 /* NewsRSS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsRSS.h; sourceTree = "<group>"; };
-		80837FD91C919231004E2C45 /* NewsRSS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsRSS.m; sourceTree = "<group>"; };
 		80D158291C900C3D0020CEA0 /* RSSAppleNews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RSSAppleNews.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		80D1582D1C900C3D0020CEA0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		80D1582F1C900C3D0020CEA0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -68,6 +73,22 @@
 		80D158671C901EE90020CEA0 /* TableCellCustom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableCellCustom.m; sourceTree = "<group>"; };
 		80D1586B1C904D3D0020CEA0 /* BrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowserViewController.h; sourceTree = "<group>"; };
 		80D1586C1C904D3D0020CEA0 /* BrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrowserViewController.m; sourceTree = "<group>"; };
+		A6EB8C631CA2D6CF00A84DCF /* AddRSSFeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddRSSFeedViewController.h; sourceTree = "<group>"; };
+		A6EB8C641CA2D6CF00A84DCF /* AddRSSFeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddRSSFeedViewController.m; sourceTree = "<group>"; };
+		A6EB8C661CA2FB3B00A84DCF /* CatalogRSSFeedTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatalogRSSFeedTableViewController.h; sourceTree = "<group>"; };
+		A6EB8C671CA2FB3B00A84DCF /* CatalogRSSFeedTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CatalogRSSFeedTableViewController.m; sourceTree = "<group>"; };
+		A6EB8C6B1CA3319700A84DCF /* UserRSSFeedTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserRSSFeedTableViewController.h; sourceTree = "<group>"; };
+		A6EB8C6C1CA3319700A84DCF /* UserRSSFeedTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserRSSFeedTableViewController.m; sourceTree = "<group>"; };
+		A6EB8C711CA3E47100A84DCF /* RSSDetails+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RSSDetails+CoreDataProperties.h"; sourceTree = "<group>"; };
+		A6EB8C721CA3E47100A84DCF /* RSSDetails+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RSSDetails+CoreDataProperties.m"; sourceTree = "<group>"; };
+		A6EB8C731CA3E47100A84DCF /* RSSDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSSDetails.h; sourceTree = "<group>"; };
+		A6EB8C741CA3E47100A84DCF /* RSSDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSSDetails.m; sourceTree = "<group>"; };
+		A6EB8C751CA3E47100A84DCF /* RSSnews+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RSSnews+CoreDataProperties.h"; sourceTree = "<group>"; };
+		A6EB8C761CA3E47100A84DCF /* RSSnews+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RSSnews+CoreDataProperties.m"; sourceTree = "<group>"; };
+		A6EB8C771CA3E47100A84DCF /* RSSnews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSSnews.h; sourceTree = "<group>"; };
+		A6EB8C781CA3E47100A84DCF /* RSSnews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSSnews.m; sourceTree = "<group>"; };
+		A6EB8C7D1CA410A100A84DCF /* WorkingWithCoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkingWithCoreData.h; sourceTree = "<group>"; };
+		A6EB8C7E1CA410A100A84DCF /* WorkingWithCoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkingWithCoreData.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,10 +139,10 @@
 		80D1582B1C900C3D0020CEA0 /* RSSAppleNews */ = {
 			isa = PBXGroup;
 			children = (
+				A6EB8C691CA32D1100A84DCF /* CoreData */,
+				A6EB8C6A1CA3314200A84DCF /* CatalogRSS */,
 				80D1582F1C900C3D0020CEA0 /* AppDelegate.h */,
 				80D158301C900C3D0020CEA0 /* AppDelegate.m */,
-				80837FD81C919231004E2C45 /* NewsRSS.h */,
-				80837FD91C919231004E2C45 /* NewsRSS.m */,
 				80D158621C900D540020CEA0 /* ReadRssTableViewController.h */,
 				80D158631C900D540020CEA0 /* ReadRssTableViewController.m */,
 				8031ACC81C9715F600AB6785 /* LoadingData.h */,
@@ -166,6 +187,36 @@
 				80D158561C900C3D0020CEA0 /* Info.plist */,
 			);
 			path = RSSAppleNewsUITests;
+			sourceTree = "<group>";
+		};
+		A6EB8C691CA32D1100A84DCF /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				A6EB8C7D1CA410A100A84DCF /* WorkingWithCoreData.h */,
+				A6EB8C7E1CA410A100A84DCF /* WorkingWithCoreData.m */,
+				A6EB8C711CA3E47100A84DCF /* RSSDetails+CoreDataProperties.h */,
+				A6EB8C721CA3E47100A84DCF /* RSSDetails+CoreDataProperties.m */,
+				A6EB8C731CA3E47100A84DCF /* RSSDetails.h */,
+				A6EB8C741CA3E47100A84DCF /* RSSDetails.m */,
+				A6EB8C751CA3E47100A84DCF /* RSSnews+CoreDataProperties.h */,
+				A6EB8C761CA3E47100A84DCF /* RSSnews+CoreDataProperties.m */,
+				A6EB8C771CA3E47100A84DCF /* RSSnews.h */,
+				A6EB8C781CA3E47100A84DCF /* RSSnews.m */,
+			);
+			name = CoreData;
+			sourceTree = "<group>";
+		};
+		A6EB8C6A1CA3314200A84DCF /* CatalogRSS */ = {
+			isa = PBXGroup;
+			children = (
+				A6EB8C631CA2D6CF00A84DCF /* AddRSSFeedViewController.h */,
+				A6EB8C641CA2D6CF00A84DCF /* AddRSSFeedViewController.m */,
+				A6EB8C661CA2FB3B00A84DCF /* CatalogRSSFeedTableViewController.h */,
+				A6EB8C671CA2FB3B00A84DCF /* CatalogRSSFeedTableViewController.m */,
+				A6EB8C6B1CA3319700A84DCF /* UserRSSFeedTableViewController.h */,
+				A6EB8C6C1CA3319700A84DCF /* UserRSSFeedTableViewController.m */,
+			);
+			name = CatalogRSS;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -299,15 +350,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A6EB8C7F1CA410A100A84DCF /* WorkingWithCoreData.m in Sources */,
+				A6EB8C7A1CA3E47100A84DCF /* RSSDetails.m in Sources */,
 				8031ACCA1C9715F600AB6785 /* LoadingData.m in Sources */,
+				A6EB8C681CA2FB3B00A84DCF /* CatalogRSSFeedTableViewController.m in Sources */,
+				A6EB8C651CA2D6CF00A84DCF /* AddRSSFeedViewController.m in Sources */,
 				80D1583A1C900C3D0020CEA0 /* RSSAppleNews.xcdatamodeld in Sources */,
-				80837FDA1C919231004E2C45 /* NewsRSS.m in Sources */,
+				A6EB8C7C1CA3E47100A84DCF /* RSSnews.m in Sources */,
+				A6EB8C6D1CA3319700A84DCF /* UserRSSFeedTableViewController.m in Sources */,
 				80D158311C900C3D0020CEA0 /* AppDelegate.m in Sources */,
 				80D158681C901EE90020CEA0 /* TableCellCustom.m in Sources */,
+				A6EB8C791CA3E47100A84DCF /* RSSDetails+CoreDataProperties.m in Sources */,
 				80D158641C900D540020CEA0 /* ReadRssTableViewController.m in Sources */,
 				80D1582E1C900C3D0020CEA0 /* main.m in Sources */,
 				8031ACCD1C97175600AB6785 /* Parser.m in Sources */,
 				80D1586D1C904D3D0020CEA0 /* BrowserViewController.m in Sources */,
+				A6EB8C7B1CA3E47100A84DCF /* RSSnews+CoreDataProperties.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
