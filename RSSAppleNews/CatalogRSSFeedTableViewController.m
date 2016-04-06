@@ -25,10 +25,9 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadingRSSToFinish:) name:@"LoadingCatalogRSS" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(parserDidFinish:) name:@"ParserDidFinishCatalogRSS" object:nil];
-
 }
 
-- (void)viewWillAppear:(BOOL)animated{
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
     self.catalogRSS = [[WorkingWithCoreData sharedMyManagerCoreData] getAllCategories];
     
@@ -77,7 +76,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
 
     cell.textLabel.text = rssCatalog.nameRSS;
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%lu",rssCatalog.details.count];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%u",rssCatalog.details.count];
     
     return cell;
 }

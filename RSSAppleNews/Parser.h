@@ -13,4 +13,5 @@
 
 + (id)sharedMyManagerParser;
 - (void)startParser:(NSMutableData *)data urlRSS:(NSString *)urlRSS;
+
 @end

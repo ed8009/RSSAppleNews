@@ -35,10 +35,10 @@
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"Please, fill in all fields" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil, nil];
         [alert show];
     }
-
 }
 
 - (IBAction)closeModal:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
 @end

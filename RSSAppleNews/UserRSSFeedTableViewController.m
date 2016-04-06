@@ -64,7 +64,6 @@
     [[Parser sharedMyManagerParser] startParser:[notification object] urlRSS:nil];
 }
 
-
 - (void)parserDidFinish:(NSNotification*)notification {
     self.newsCoreData = [[WorkingWithCoreData sharedMyManagerCoreData] getDetailOfSelectedCategory:self.urlRSS];
     [self.tableView reloadData];
@@ -162,8 +161,7 @@
 }
 
 - (IBAction)addRSSFeed:(id)sender {
-    
     NSLog(@"ddd");
-    
 }
+
 @end

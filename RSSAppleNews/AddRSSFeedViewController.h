@@ -10,11 +10,11 @@
 #import "Parser.h"
 #import "LoadingData.h"
 
-
 @interface AddRSSFeedViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet UITextField *nameRSSField;
 @property (weak, nonatomic) IBOutlet UITextField *linkRSSField;
+
 - (IBAction)add:(id)sender;
 - (IBAction)closeModal:(id)sender;
 
