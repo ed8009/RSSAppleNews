@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="15D21" minimumToolsVersion="Automatic">
-    <entity name="NewsRSS" representedClassName="NewsRSS" syncable="YES">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10171" systemVersion="15E65" minimumToolsVersion="Automatic">
+    <entity name="RSSDetails" representedClassName="RSSDetails" syncable="YES">
         <attribute name="newsDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="newsDescription" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="newsLink" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="newsTitle" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="rss" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="RSSnews" inverseName="details" inverseEntity="RSSnews" syncable="YES"/>
+    </entity>
+    <entity name="RSSnews" representedClassName="RSSnews" syncable="YES">
+        <attribute name="linkRSS" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="nameRSS" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="details" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="RSSDetails" inverseName="rss" inverseEntity="RSSDetails" syncable="YES"/>
     </entity>
     <elements>
-        <element name="NewsRSS" positionX="-63" positionY="-18" width="128" height="105"/>
+        <element name="RSSDetails" positionX="9" positionY="-55" width="128" height="120"/>
+        <element name="RSSnews" positionX="-290" positionY="-151" width="128" height="88"/>
     </elements>
 </model>

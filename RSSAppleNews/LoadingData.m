@@ -21,7 +21,8 @@
     return sharedMyManager;
 }
 
-- (void)startConnection:(NSURL *)url {
+- (void)startConnection:(NSURL *)url{
+    
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     NSURLRequest *theRequest=[NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10.0];
     NSURLConnection *theConnection=[[NSURLConnection alloc] initWithRequest:theRequest delegate:self];
@@ -39,12 +40,17 @@
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"LoadingFinish" object:self.rssData];
+    NSString *result = [[NSString alloc] initWithData:self.rssData encoding:NSUTF8StringEncoding];
+    NSLog(@"%@",result);
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"LoadingFinishUserRSS" object:self.rssData];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"loadingFinishLoadingReadRSS" object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"LoadingCatalogRSS" object:self.rssData];
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
     NSLog(@"%@", error);
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"ParserDidFinish" object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"ParserDidFinishUserRSS" object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"ParserDidFinishReadRSS" object:nil];
 }
 
 @end

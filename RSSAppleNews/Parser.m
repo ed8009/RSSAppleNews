@@ -15,8 +15,6 @@
 @property (nonatomic, strong) NSMutableString *currentTitle;
 @property (nonatomic, strong) NSMutableString *pubDate;
 @property (nonatomic, strong) NSMutableString *currentLink;
-@property (nonatomic, strong) NSManagedObjectContext* managedObjectContext;
-@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 
 @end
 
@@ -33,17 +31,8 @@
     return sharedMyManager;
 }
 
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-        AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-        self.managedObjectContext = delegate.managedObjectContext;
-    }
-    
-    return self;
-}
-
-- (void)startParser:(NSMutableData *)data {
+- (void)startParser:(NSMutableData *)data urlRSS:(NSString *)urlRSS {
+    self.urlRSS = urlRSS;
     NSXMLParser *rssParser = [[NSXMLParser alloc] initWithData:data];
     rssParser.delegate = self;
     [rssParser parse];
@@ -79,13 +68,14 @@
 
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
     if ([elementName isEqualToString:@"item"]) {
-        if (![self essenceExistsInDatabase:self.currentLink]) {
+
+        if (![[WorkingWithCoreData sharedMyManagerCoreData] essenceExistsInDatabase:self.currentLink rssEntity:@"RSSDetails"]) {
             NSDictionary *newsItem = [NSDictionary dictionaryWithObjectsAndKeys:
                                       self.currentTitle, @"title",
                                       self.pubDate, @"pubDate",
                                       self.currentDescription, @"description",
                                       self.currentLink, @"link", nil];
-            [self saveDataBase:newsItem];
+            [[WorkingWithCoreData sharedMyManagerCoreData] saveDataBase:newsItem urlRSS:self.urlRSS];
 
             self.currentTitle = nil;
             self.pubDate = nil;
@@ -97,68 +87,13 @@
 }
 
 - (void)parserDidEndDocument:(NSXMLParser *)parser {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"ParserDidFinish" object:nil];
-}
-
-- (void)saveDataBase:(NSDictionary *)newsItem {
-    NSManagedObjectContext *context = self.managedObjectContext;
-
-    static NSDateFormatter * dateFormatter;
-    if (dateFormatter == nil) {
-        dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"EEE, dd MMM yyyy HH:mm:ss zzz"];
-        [dateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
-    }
-    NSDate *date =  [dateFormatter dateFromString:newsItem[@"pubDate"]];
-    
-    NSManagedObject *newDevice = [NSEntityDescription insertNewObjectForEntityForName:@"NewsRSS" inManagedObjectContext:context];
-    [newDevice setValue:newsItem[@"title"] forKey:@"newsTitle"];
-    [newDevice setValue:newsItem[@"description"] forKey:@"newsDescription"];
-    [newDevice setValue:date forKey:@"newsDate"];
-    [newDevice setValue:newsItem[@"link"] forKey:@"newsLink"];
-    
-    NSError *error;
-
-    if (![context save:&error]) {
-        NSLog(@"Can't save! %@ %@", error, [error localizedDescription]);
-    }
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"ParserDidFinishUserRSS" object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"ParserDidFinishReadRSS" object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"ParserDidFinishCatalogRSS" object:nil];
 }
 
 - (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError {
     NSLog(@"%@", parseError);
-}
-
-- (BOOL)essenceExistsInDatabase:(NSString *)link {
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"NewsRSS" inManagedObjectContext:self.managedObjectContext];
-    
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    request.entity = entity;
-    request.fetchLimit = 1;
-    request.predicate = [NSPredicate predicateWithFormat:@"newsLink == %@", link];
-    
-    NSError *error = nil;
-    NSUInteger count = [self.managedObjectContext countForFetchRequest:request error:&error];
-    
-    if (count) {
-        return YES;
-    }
-    else {
-        return NO;
-    }
-}
-
-- (NSArray *)getNewsFromDatabase {
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"NewsRSS"];
-
-    NSSortDescriptor *sort = [[NSSortDescriptor alloc] initWithKey:@"newsDate" ascending:NO];
-    NSArray *sortDescriptors = [NSArray arrayWithObjects:sort, nil];
-    [fetchRequest setSortDescriptors:sortDescriptors];
-    
-    NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
-    NSFetchedResultsController *theFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
-    self.fetchedResultsController = theFetchedResultsController;
-    
-    return [managedObjectContext executeFetchRequest:fetchRequest error:nil];
 }
 
 @end

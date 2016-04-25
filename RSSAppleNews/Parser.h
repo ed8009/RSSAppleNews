@@ -7,14 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "NewsRSS.h"
-#import <CoreData/CoreData.h>
-#import "AppDelegate.h"
-
+#import "WorkingWithCoreData.h"
 @interface Parser : UIViewController <NSXMLParserDelegate>
+@property (nonatomic, strong) NSString *urlRSS;
 
 + (id)sharedMyManagerParser;
-- (void)startParser:(NSMutableData *)data;
-- (NSArray *)getNewsFromDatabase;
+- (void)startParser:(NSMutableData *)data urlRSS:(NSString *)urlRSS;
 
 @end
