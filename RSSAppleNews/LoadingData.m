@@ -40,6 +40,8 @@
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+    NSString *result = [[NSString alloc] initWithData:self.rssData encoding:NSUTF8StringEncoding];
+    NSLog(@"%@",result);
     [[NSNotificationCenter defaultCenter] postNotificationName:@"LoadingFinishUserRSS" object:self.rssData];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"loadingFinishLoadingReadRSS" object:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"LoadingCatalogRSS" object:self.rssData];
